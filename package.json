@@ -1,0 +1,41 @@
+{
+  "name": "hassio_rinnai_brasil",
+  "version": "1.0.0",
+  "description": "Integração para os aquecedores da Rinnai no Brasil com módulo wifi ROU-003",
+  "main": "index.js",
+  "scripts": {
+    "start": "APP_DEBUG=false APP_PREFIX=/rinnai APP_LOG_LEVEL=error NODE_ENV=production node app/index.js",
+    "nodemon": "APP_DEBUG=true APP_PREFIX=/rinnai APP_LOG_LEVEL=debug NODE_ENV=development nodemon app/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/FernandoWahl/hassio_rinnai_brasil.git"
+  },
+  "author": "Fernando Wahl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FernandoWahl/hassio_rinnai_brasil/issues"
+  },
+  "homepage": "https://github.com/FernandoWahl/hassio_rinnai_brasil#readme",
+  "devDependencies": {
+    "dotenv": "^16.3.1",
+    "nodemon": "^3.0.1",
+    "yarn": "^1.22.19"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "compression": "^1.7.4",
+    "consign": "^0.1.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-http-context": "^1.2.4",
+    "express-winston": "^4.2.0",
+    "jsonwebtoken": "^9.0.1",
+    "moment": "^2.29.4",
+    "mqtt": "^5.0.0",
+    "uuid": "^9.0.0",
+    "winston": "^3.10.0",
+    "yamljs": "^0.3.0"
+  }
+}
