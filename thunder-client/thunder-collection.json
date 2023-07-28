@@ -1,0 +1,175 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Rinnai Hassio",
+    "dateExported": "2023-07-28T03:52:28.886Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "7d2e08f3-0eaa-4a89-bc21-6bac9ff9f6d7",
+            "colId": "a7f590ec-c9e6-4eec-9d74-2ac997a27789",
+            "containerId": "",
+            "name": "/login",
+            "url": "/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-07-27T20:28:08.923Z",
+            "modified": "2023-07-27T20:30:01.663Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"username\": \"fernando\",\n    \"password\": \"pepe2810\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "set-env-var",
+                    "custom": "json.token",
+                    "action": "setto",
+                    "value": "{{token}}"
+                }
+            ]
+        },
+        {
+            "_id": "8d8633d2-4d26-407d-9c83-02010ee46ab8",
+            "colId": "a7f590ec-c9e6-4eec-9d74-2ac997a27789",
+            "containerId": "",
+            "name": "/verify",
+            "url": "/verify",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-07-27T20:30:55.743Z",
+            "modified": "2023-07-27T20:32:22.848Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "04a0ef57-c853-4f1e-bfd4-dfd42c6fe2d1",
+            "colId": "a7f590ec-c9e6-4eec-9d74-2ac997a27789",
+            "containerId": "",
+            "name": "/consumption",
+            "url": "/consumption",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-07-27T20:31:49.292Z",
+            "modified": "2023-07-27T20:33:13.557Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "5f3b222b-9edc-4326-a8b4-d9039023bba0",
+            "colId": "a7f590ec-c9e6-4eec-9d74-2ac997a27789",
+            "containerId": "",
+            "name": "/state",
+            "url": "/state",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-07-27T20:35:25.998Z",
+            "modified": "2023-07-27T20:35:36.885Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "771a5dd9-a206-4a50-ad2c-d76a083ef44c",
+            "colId": "a7f590ec-c9e6-4eec-9d74-2ac997a27789",
+            "containerId": "",
+            "name": "/state",
+            "url": "/state",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-07-28T03:22:06.667Z",
+            "modified": "2023-07-28T03:30:29.195Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"isOn\": true\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "283e8dfc-94e6-46c1-8934-db2c1f866460",
+            "colId": "a7f590ec-c9e6-4eec-9d74-2ac997a27789",
+            "containerId": "",
+            "name": "/device/params",
+            "url": "/device/params",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-07-27T20:43:51.183Z",
+            "modified": "2023-07-27T20:44:02.416Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "46086ec2-209c-48b0-a4be-43b254849edc",
+            "colId": "a7f590ec-c9e6-4eec-9d74-2ac997a27789",
+            "containerId": "",
+            "name": "/temperature/increase",
+            "url": "/temperature/increase",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-07-28T03:38:30.069Z",
+            "modified": "2023-07-28T03:38:59.490Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "1692091f-1b07-4c78-aa7c-08468043aa28",
+            "colId": "a7f590ec-c9e6-4eec-9d74-2ac997a27789",
+            "containerId": "",
+            "name": "/historic",
+            "url": "/historic",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-07-28T01:49:41.198Z",
+            "modified": "2023-07-28T01:49:54.030Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "6ae62e69-e4a2-4992-9d4c-f01fbd59d482",
+            "colId": "a7f590ec-c9e6-4eec-9d74-2ac997a27789",
+            "containerId": "",
+            "name": "/temperature/decrease",
+            "url": "/temperature/decrease",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2023-07-28T03:41:25.877Z",
+            "modified": "2023-07-28T03:42:20.766Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "8c934639-97cd-4d8e-a101-ab5d9d4653d1",
+            "colId": "a7f590ec-c9e6-4eec-9d74-2ac997a27789",
+            "containerId": "",
+            "name": "/historic/errors",
+            "url": "/historic/errors",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-07-28T02:29:11.251Z",
+            "modified": "2023-07-28T02:29:32.484Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ],
+    "settings": {
+        "auth": {
+            "type": "bearer",
+            "bearer": "{{token}}"
+        },
+        "options": {
+            "baseUrl": "{{host}}"
+        }
+    }
+}

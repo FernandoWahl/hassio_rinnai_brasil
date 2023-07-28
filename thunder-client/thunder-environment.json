@@ -1,0 +1,17 @@
+{
+    "client": "Thunder Client",
+    "environmentName": "Hassio",
+    "dateExported": "2023-07-28T03:54:03.861Z",
+    "version": "1.0",
+    "envFile": "/addons/hassio_rinnai_brasil/.env",
+    "variables": [
+        {
+            "name": "host",
+            "value": "http://localhost:40002{{APP_PREFIX}}"
+        },
+        {
+            "name": "token",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOiJsb2dpbjpmZXJuYW5kbyIsImlhdCI6MTY5MDQ4OTgxMywiZXhwIjoxNjkwNzQ5MDEzfQ.fIXHEHpScahfnkTvmpP5-uYkVoxglrIifQ3IQDCMNcc"
+        }
+    ]
+}
