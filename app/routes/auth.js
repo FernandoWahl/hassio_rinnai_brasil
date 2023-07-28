@@ -1,3 +1,4 @@
+require('dotenv').config()
 const prefix = process.env.APP_PREFIX;
 
 /** @param { import('express').Express } app */

@@ -4,8 +4,8 @@
   "description": "Integração para os aquecedores da Rinnai no Brasil com módulo wifi ROU-003",
   "main": "index.js",
   "scripts": {
-    "start": "APP_DEBUG=false APP_PREFIX=/rinnai APP_LOG_LEVEL=error NODE_ENV=production node app/index.js",
-    "nodemon": "APP_DEBUG=true APP_PREFIX=/rinnai APP_LOG_LEVEL=debug NODE_ENV=development nodemon app/index.js",
+    "start": "node app/index.js",
+    "nodemon": "nodemon app/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,6 +33,7 @@
     "express-winston": "^4.2.0",
     "jsonwebtoken": "^9.0.1",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "mqtt": "^5.0.0",
     "uuid": "^9.0.0",
     "winston": "^3.10.0",

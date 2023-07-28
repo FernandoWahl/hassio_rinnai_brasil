@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const consign = require('consign')
 const app = express()
@@ -11,7 +12,6 @@ consign({
 	})
     .include('./middlewares/log')
 	.then('./middlewares/global')
-	.then('./middlewares/service')
 	.then('./services')
 	.then('./controllers')
 	.then('./routes')

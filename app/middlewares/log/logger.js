@@ -1,3 +1,4 @@
+require('dotenv').config()
 const winston = require('winston');
 const  expressWinston = require('express-winston');
 const { combine, timestamp, printf, colorize, json } = winston.format;
