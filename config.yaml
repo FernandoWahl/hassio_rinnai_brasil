@@ -14,10 +14,10 @@ options:
   device_serial_number: ""
   device_host: ""
   device_poll_interval: 
-  mqtt_host: ""
+  mqtt_host: "core-mosquitto"
   mqtt_user: ""
   mqtt_password: ""
-  ha_ip: ""
+  hassio_ip: ""
 
 schema:
   device_model: str
@@ -27,4 +27,4 @@ schema:
   mqtt_host: str
   mqtt_user: str
   mqtt_password: str
-  ha_ip: str
+  hassio_ip: str

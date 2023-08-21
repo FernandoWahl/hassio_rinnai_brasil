@@ -104,7 +104,7 @@ module.exports = (app) => {
           let outletTemperature = +params[11] / 100;
           let currentPowerInKCal = +params[9] / 100;
           let powerInkW = round(currentPowerInKCal * 0.014330754);
-          let isPoweredOn = params[0];
+          let isPoweredOn = params[0] !== "11"
 
           let waterFlow = round(+params[12] / 100);
           let workingTime = +params[4];
@@ -181,19 +181,19 @@ module.exports = (app) => {
     });
   };
 
-  // this.priority = (ip) => {
-  //     let axios = app.middlewares.global.axios;
-  //     let logger = app.middlewares.log.logger;
+  this.priority = (ip) => {
+      let axios = app.middlewares.global.axios;
+      let logger = app.middlewares.log.logger;
 
-  //     return new Promise((resolve, reject) => {
-  //         axios.get(getHost(`ip:${ip}:pri`))
-  //             .then(() => resolve({ priority: true, ip: ip }))
-  //             .catch(error => {
-  //                 logger.error("service:priority:error", error?.message || error)
-  //                 reject({ priority: false, ip: ip })
-  //             });
-  //     });
-  // }
+      return new Promise((resolve, reject) => {
+          axios.get(getHost(`ip:${ip}:pri`))
+              .then(() => resolve({ priority: true, ip: ip }))
+              .catch(error => {
+                  logger.error("service:priority:error", error?.message || error)
+                  reject({ priority: false, ip: ip })
+              });
+      });
+  }
 
   this.setState = (isOn) => {
     let axios = app.middlewares.global.axios;
@@ -228,7 +228,7 @@ module.exports = (app) => {
     });
   };
 
-  this.increaseTemperature = (isOn) => {
+  this.increaseTemperature = () => {
     let axios = app.middlewares.global.axios;
     let logger = app.middlewares.log.logger;
     
@@ -261,7 +261,7 @@ module.exports = (app) => {
     });
   };
 
-  this.decreaseTemperature = (isOn) => {
+  this.decreaseTemperature = () => {
     let axios = app.middlewares.global.axios;
     let logger = app.middlewares.log.logger;
     

@@ -15,6 +15,9 @@ consign({
 	.then('./services')
 	.then('./controllers')
 	.then('./routes')
+	.then('./hassio/config')
+	.then('./hassio/connections')
+	.then('./hassio')
 	.into(app)
 
 let logger = app.middlewares.log.logger;
