@@ -17,9 +17,8 @@ module.exports = app => {
         await device.updateConsumption()
     }
 
-    const recreateEntities = async () => {
-        let entities = app.hassio.entities;
-        entities.initConfig();
+    const recreateEntities = () => {
+        app.hassio.entities.initConfig();
     }
 
     mqttClient.on("connect", () => {

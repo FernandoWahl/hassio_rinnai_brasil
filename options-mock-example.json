@@ -1,0 +1,13 @@
+{
+    "device_model": "",
+    "device_serial_number": "",
+    "device_host": "",
+    "device_poll_interval": 10,
+    "hassio_ip": "",
+    "users": [
+      {
+        "username": "",
+        "password": ""
+      }
+    ]
+  }

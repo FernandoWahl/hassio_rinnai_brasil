@@ -1,6 +1,6 @@
 {
   "name": "hassio_rinnai_brasil",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Integração para os aquecedores da Rinnai no Brasil com módulo wifi ROU-003",
   "main": "index.js",
   "scripts": {
@@ -19,11 +19,11 @@
   },
   "homepage": "https://github.com/FernandoWahl/hassio_rinnai_brasil#readme",
   "devDependencies": {
-    "dotenv": "^16.3.1",
     "nodemon": "^3.0.1",
     "yarn": "^1.22.19"
   },
   "dependencies": {
+    "dotenv": "^16.3.1",
     "axios": "^1.4.0",
     "compression": "^1.7.4",
     "consign": "^0.1.6",
