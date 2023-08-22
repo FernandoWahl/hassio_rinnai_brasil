@@ -12,11 +12,6 @@ module.exports = app => {
             host: optionsFromfile.device_host,
             poll_interval: optionsFromfile.device_poll_interval
         },
-        mqtt: {
-            host: optionsFromfile.mqtt_host,
-            user: optionsFromfile.mqtt_user,
-            password: optionsFromfile.mqtt_password,
-        },
         haIp: optionsFromfile.ha_ip
     }
 };
