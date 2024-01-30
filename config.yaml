@@ -1,32 +1,40 @@
 name: "Aquecedores Rinnai Brasil (Módulo ROU-003)"
 description: "Integração para os aquecedores da Rinnai no Brasil com módulo wifi ROU-003"
-version: "1.0.5"
+version: "1.0.8"
 slug: "hassio_rinnai_brasil"
 init: false
 discovery:
-   - mqtt
+  - mqtt
 services:
-   - mqtt:need
+  - mqtt:need
 arch:
-   - aarch64
-   - amd64
-   - armhf
-   - armv7
-   - i386
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+ports:
+  40003/tcp: 40003
 options:
-   device_model: ""
-   device_serial_number: ""
-   device_host: ""
-   device_poll_interval: 10
-   hassio_ip: ""
-   users: []
+  device_model: ""
+  device_serial_number: ""
+  device_host: ""
+  device_poll_interval: 10
+  hassio_ip: ""
+  mqtt_host: ""
+  mqtt_user: ""
+  mqtt_password: ""
+  users: []
 
 schema:
-   device_model: str
-   device_serial_number: str
-   device_host: str
-   device_poll_interval: int
-   hassio_ip: str
-   users:
-      -  username: str
-         password: str
+  device_model: str
+  device_serial_number: str
+  device_host: str
+  device_poll_interval: int
+  hassio_ip: str
+  mqtt_host: str
+  mqtt_user: str
+  mqtt_password: str
+  users:
+    - username: str
+      password: str

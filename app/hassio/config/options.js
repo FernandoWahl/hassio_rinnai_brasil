@@ -6,6 +6,11 @@ const rawOptions = fs.readFileSync(isProduction ? '/data/options.json' : './opti
 module.exports = app => {
     const optionsFromfile = JSON.parse(rawOptions)
     return {
+        mqtt: {
+            host: optionsFromfile.mqtt_host,
+            user: optionsFromfile.mqtt_user,
+            password: optionsFromfile.mqtt_password,
+        },
         device: {
             model: optionsFromfile.device_model,
             serialNumber: optionsFromfile.device_serial_number,
