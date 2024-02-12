@@ -33,9 +33,7 @@ module.exports = (app) => {
         })
         .catch((error) => {
           logger.error("service:consumption:error", error?.message || error);
-          reject({
-            message: "Falha ao obter os dados",
-          });
+          throw error
         });
     });
   };
@@ -51,9 +49,7 @@ module.exports = (app) => {
         .then((response) => resolve(response))
         .catch((error) => {
           logger.error("service:state:error", error?.message || error);
-          reject({
-            message: "Falha ao obter os dados",
-          });
+          throw error
         });
     });
   };
@@ -66,7 +62,7 @@ module.exports = (app) => {
       axios
         .get(getHost("/historico"))
         .then((response) => {
-          var historic = [];
+          let historic = [];
           response.data.split(";").forEach((line) => {
             let item = line.split(",");
             if (item.length > 2) {
@@ -83,9 +79,7 @@ module.exports = (app) => {
         })
         .catch((error) => {
           logger.error("service:historic:error", error?.message || error);
-          reject({
-            message: "Falha ao obter os dados",
-          });
+          throw error
         });
     });
   };
@@ -145,9 +139,7 @@ module.exports = (app) => {
         })
         .catch((error) => {
           logger.error("service:deviceParams:error", error?.message || error);
-          reject({
-            message: "Falha ao obter os dados",
-          });
+          throw error
         });
     });
   };
@@ -160,7 +152,7 @@ module.exports = (app) => {
       axios
         .get(getHost("/erros"))
         .then((response) => {
-          var historic = [];
+          let historic = [];
           response.data.split(";").forEach((line) => {
             let item = line.split(",");
             if (item[0] !== "0" && item[0] !== "") {
@@ -174,31 +166,29 @@ module.exports = (app) => {
         })
         .catch((error) => {
           logger.error("service:errorHistoric:error", error?.message || error);
-          reject({
-            message: "Falha ao obter os dados",
-          });
+          throw error
         });
     });
   };
 
   this.priority = (ip) => {
-      let axios = app.middlewares.global.axios;
-      let logger = app.middlewares.log.logger;
+    let axios = app.middlewares.global.axios;
+    let logger = app.middlewares.log.logger;
 
-      return new Promise((resolve, reject) => {
-          axios.get(getHost(`ip:${ip}:pri`))
-              .then(() => resolve({ priority: true, ip: ip }))
-              .catch(error => {
-                  logger.error("service:priority:error", error?.message || error)
-                  reject({ priority: false, ip: ip })
-              });
-      });
+    return new Promise((resolve, reject) => {
+      axios.get(getHost(`ip:${ip}:pri`))
+        .then(() => resolve({ priority: true, ip: ip }))
+        .catch(error => {
+          logger.error("service:priority:error", error?.message || error)
+          reject({ priority: false, ip: ip })
+        });
+    });
   }
 
   this.setState = (isOn) => {
     let axios = app.middlewares.global.axios;
     let logger = app.middlewares.log.logger;
-    
+
     return new Promise((resolve, reject) => {
       service
         .state()
@@ -213,17 +203,13 @@ module.exports = (app) => {
             .then((response) => parseStateParams(response.data))
             .then((response) => resolve(response))
             .catch((error) => {
-              logger.error("service:setState:error",error?.message || erro);
-              reject({
-                message: "Falha ao obter os dados",
-              });
+              logger.error("service:setState:error", error?.message || erro);
+              throw error
             });
         })
         .catch((error) => {
           logger.error("service:setState:error", error?.message || error);
-          reject({
-            message: "Falha ao obter os dados",
-          });
+          throw error
         });
     });
   };
@@ -231,7 +217,7 @@ module.exports = (app) => {
   this.increaseTemperature = () => {
     let axios = app.middlewares.global.axios;
     let logger = app.middlewares.log.logger;
-    
+
     return new Promise((resolve, reject) => {
       service
         .state()
@@ -246,17 +232,13 @@ module.exports = (app) => {
             .then((response) => parseStateParams(response.data))
             .then((response) => resolve(response))
             .catch((error) => {
-              logger.error("service:increaseTemperature:error",error?.message || erro);
-              reject({
-                message: "Falha ao obter os dados",
-              });
+              logger.error("service:increaseTemperature:error", error?.message || erro);
+              throw error
             });
         })
         .catch((error) => {
           logger.error("service:increaseTemperature:error", error?.message || error);
-          reject({
-            message: "Falha ao obter os dados",
-          });
+          throw error
         });
     });
   };
@@ -264,7 +246,7 @@ module.exports = (app) => {
   this.decreaseTemperature = () => {
     let axios = app.middlewares.global.axios;
     let logger = app.middlewares.log.logger;
-    
+
     return new Promise((resolve, reject) => {
       service
         .state()
@@ -279,17 +261,13 @@ module.exports = (app) => {
             .then((response) => parseStateParams(response.data))
             .then((response) => resolve(response))
             .catch((error) => {
-              logger.error("service:decreaseTemperature:error",error?.message || erro);
-              reject({
-                message: "Falha ao obter os dados",
-              });
+              logger.error("service:decreaseTemperature:error", error?.message || erro);
+              throw error
             });
         })
         .catch((error) => {
           logger.error("service:decreaseTemperature:error", error?.message || error);
-          reject({
-            message: "Falha ao obter os dados",
-          });
+          throw error
         });
     });
   };

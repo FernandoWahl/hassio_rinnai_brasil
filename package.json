@@ -1,11 +1,11 @@
 {
   "name": "hassio_rinnai_brasil",
-  "version": "1.0.5",
+  "version": "1.0.9",
   "description": "Integração para os aquecedores da Rinnai no Brasil com módulo wifi ROU-003",
   "main": "index.js",
   "scripts": {
-    "start": "node app/index.js",
-    "nodemon": "nodemon app/index.js",
+    "start": "APP_PORT=40002 APP_DEBUG=true APP_PREFIX=/rinnai APP_LOG_LEVEL=debug APP_JWT_SECRET=5B777EC1-C962-4945-B705-306DE5967CBC NODE_ENV=develop node app/index.js",
+    "nodemon": "APP_PORT=40002 APP_DEBUG=true APP_PREFIX=/rinnai APP_LOG_LEVEL=debug APP_JWT_SECRET=5B777EC1-C962-4945-B705-306DE5967CBC NODE_ENV=develop nodemon app/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
