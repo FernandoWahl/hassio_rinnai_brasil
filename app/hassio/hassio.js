@@ -24,22 +24,24 @@ module.exports = app => {
     mqttClient.on("connect", () => {
         logger.debug(`[MQTT] Connected success!`);
 
-        setInterval(update, pollIntervalInMs)
+        try {
+            setInterval(update, pollIntervalInMs)
 
-        let entities = app.hassio.entities;
-        mqttClient.subscribe(entities.waterHeater.mode_command_topic, (error) => {
-            if (error) logger.error("[MQTT] set water heater mode subscription error", error?.message || error)
-            else logger.debug('[MQTT] subscribed to water heater mode topic')
-        })
-    
-        mqttClient.subscribe(entities.waterHeater.temperature_command_topic, (error) => {
-            if (error) logger.error("[MQTT] set water heater temp subscription error", error?.message || error)
-            else logger.debug('[MQTT] subscribed to water heater temp topic')
-        })
-
-        setInterval(recreateEntities, 600000)
-
+            let entities = app.hassio.entities;
+            mqttClient.subscribe(entities.waterHeater.mode_command_topic, (error) => {
+                if (error) logger.error("[MQTT] set water heater mode subscription error", error?.message || error)
+                else logger.debug('[MQTT] subscribed to water heater mode topic')
+            })
         
+            mqttClient.subscribe(entities.waterHeater.temperature_command_topic, (error) => {
+                if (error) logger.error("[MQTT] set water heater temp subscription error", error?.message || error)
+                else logger.debug('[MQTT] subscribed to water heater temp topic')
+            })
+    
+            setInterval(recreateEntities, 600000)
+        } catch (error) {
+            logger.error("hassio:error", error?.message || error)
+        }
     })
 
     mqttClient.on('message', (topic, message) => {

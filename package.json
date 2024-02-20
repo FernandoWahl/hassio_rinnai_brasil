@@ -1,6 +1,6 @@
 {
   "name": "hassio_rinnai_brasil",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Integração para os aquecedores da Rinnai no Brasil com módulo wifi ROU-003",
   "main": "index.js",
   "scripts": {
