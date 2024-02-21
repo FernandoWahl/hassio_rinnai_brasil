@@ -49,7 +49,7 @@ module.exports = (app) => {
         .then((response) => resolve(response))
         .catch((error) => {
           logger.error("service:state:error", error?.message || error);
-          throw error
+          reject(error?.message || error)
         });
     });
   };
@@ -138,8 +138,7 @@ module.exports = (app) => {
           });
         })
         .catch((error) => {
-          logger.error("service:deviceParams:error", error?.message || error);
-          throw error
+          reject(error?.message || error)
         });
     });
   };
@@ -165,7 +164,6 @@ module.exports = (app) => {
           resolve(historic);
         })
         .catch((error) => {
-          logger.error("service:errorHistoric:error", error?.message || error);
           throw error
         });
     });
@@ -208,7 +206,6 @@ module.exports = (app) => {
             });
         })
         .catch((error) => {
-          logger.error("service:setState:error", error?.message || error);
           throw error
         });
     });

@@ -20,27 +20,14 @@ module.exports = app => {
                     entities.waterHeater.publish(response.isPoweredOn ? 'gas' : 'off', 'mode')
                     entities.waterHeater.publish(response.targetTemperature, 'temperature')
                     entities.heatingState.publish(response.isHeating ? 'ON' : 'OFF')
-                    resolve(response) 
+                    resolve(response)
                 })
-                .catch(error => {
-                    logger.error("service:updateDeviceState:error", error?.message || error);
-                    if (retries < 5) {
-                        return setTimeout(() => {
-                            device.updateDeviceState(retries + 1)
-                        }, 500 * (retries + 1))
-                    } else {
-                        entities.waterHeater.updateAvailability(false)
-                        entities.heatingState.updateAvailability(false)
-                        reject({
-                            message: error?.message || error
-                        }) 
-                    }
-                });
+                .catch(error => device.retry(error, retries, device.updateParameters));
         })
     }
-    
+
     this.updateParameters = (retries = 0) => {
-        return new Promise((resolve, reject) => { 
+        return new Promise((resolve, reject) => {
             let entities = app.hassio.entities;
             logger.debug(`device:updateParameters:retries - ${retries}`)
             if (rinnai.getPreventUpdate()) {
@@ -56,32 +43,16 @@ module.exports = app => {
                     entities.waterFlow.publish(response.water.waterFlow)
                     entities.inletWaterTemperature.publish(response.temperature.inlet)
                     entities.wifiSignal.publish(response.device.connect.wifiPowerDBm)
-                    resolve(response) 
+                    resolve(response)
                 })
-                .catch(error => {
-                    logger.error("service:updateParameters:error", error?.message || error);
-                    if (retries < 5) {
-                        return setTimeout(() => {
-                            device.updateDeviceState(retries + 1)
-                        }, 500 * (retries + 1))
-                    } else {
-                        entities.waterHeater.updateAvailability(false)
-                        entities.inletWaterTemperature.updateAvailability(false)
-                        entities.outletWaterTemperature.updateAvailability(false)
-                        entities.power.updateAvailability(false)
-                        entities.waterFlow.updateAvailability(false)
-                        entities.wifiSignal.updateAvailability(false)
-                        reject({
-                            message: error?.message || error
-                        }) 
-                    }
-                });
+                .catch(error => device.retry(error, retries, device.updateParameters));
         })
     }
 
     let lastWaterMeasurement = -1
     let lastGasMeasurement = -1
     let lastWorkingTime = -1
+
     this.updateConsumption = (retries = 0) => {
         let entities = app.hassio.entities;
 
@@ -93,37 +64,23 @@ module.exports = app => {
                         entities.waterConsumption.publish(0)
                     }
                     lastWaterMeasurement = water
-        
+
                     if (lastGasMeasurement > gasM3) {
                         entities.gasConsumption.publish(0)
                     }
                     lastGasMeasurement = gasM3
-        
+
                     if (lastWorkingTime > workingTime) {
                         entities.workingTime.publish(0)
                     }
                     lastWorkingTime = workingTime
-        
+
                     entities.waterConsumption.publish(water)
                     entities.gasConsumption.publish(gasM3)
                     entities.workingTime.publish(workingTime)
-                    resolve({ workingTime, water, gasM3 }) 
+                    resolve({ workingTime, water, gasM3 })
                 })
-                .catch(error => {
-                    logger.error("service:updateConsumption:error", error?.message || error);
-                    if (retries < 5) {
-                        return setTimeout(() => {
-                            device.updateDeviceState(retries + 1)
-                        }, 500 * (retries + 1))
-                    } else {
-                        entities.waterConsumption.updateAvailability(false)
-                        entities.gasConsumption.updateAvailability(false)
-                        entities.workingTime.updateAvailability(false)
-                        reject({
-                            message: error?.message || error
-                        }) 
-                    }
-                });
+                .catch(error => device.retry(error, retries, device.updateConsumption));
         })
     }
 
@@ -135,6 +92,29 @@ module.exports = app => {
     this.setPowerState = (mode) => {
         rinnai.setPowerState(mode === "gas")
             .then((state) => device.updateDeviceState())
+    }
+
+
+    this.retry = (error, retries, caller) => {
+        logger.error("service:retry:error", error?.message || error);
+        try {
+            if (retries < 1) {
+                return setTimeout(() => caller(retries + 1), 500 * (retries + 1))
+            } else {
+                entities.waterConsumption.updateAvailability(false)
+                entities.gasConsumption.updateAvailability(false)
+                entities.workingTime.updateAvailability(false)
+                entities.waterHeater.updateAvailability(false)
+                entities.inletWaterTemperature.updateAvailability(false)
+                entities.outletWaterTemperature.updateAvailability(false)
+                entities.power.updateAvailability(false)
+                entities.waterFlow.updateAvailability(false)
+                entities.wifiSignal.updateAvailability(false)
+            }
+
+        } catch (error) {
+        
+        }
     }
 
     return this

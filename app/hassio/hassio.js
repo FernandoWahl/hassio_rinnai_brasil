@@ -32,12 +32,12 @@ module.exports = app => {
                 if (error) logger.error("[MQTT] set water heater mode subscription error", error?.message || error)
                 else logger.debug('[MQTT] subscribed to water heater mode topic')
             })
-        
+
             mqttClient.subscribe(entities.waterHeater.temperature_command_topic, (error) => {
                 if (error) logger.error("[MQTT] set water heater temp subscription error", error?.message || error)
                 else logger.debug('[MQTT] subscribed to water heater temp topic')
             })
-    
+
             setInterval(recreateEntities, 600000)
         } catch (error) {
             logger.error("hassio:error", error?.message || error)
@@ -45,17 +45,20 @@ module.exports = app => {
     })
 
     mqttClient.on('message', (topic, message) => {
-        logger.debug(`[MQTT] send message to topic '${topic}' and message '${message}'`)
-        let entities = app.hassio.entities;
-        let device = app.hassio.device;
-        switch (topic) {
-            case entities.waterHeater.mode_command_topic:
-                device.setPowerState(message.toString())
-                break;
-            case entities.waterHeater.temperature_command_topic:
-                device.setTargetWaterTemperature(Math.trunc(+message.toString()))
-                break;
+        try {
+            logger.debug(`[MQTT] send message to topic '${topic}' and message '${message}'`)
+            let entities = app.hassio.entities;
+            let device = app.hassio.device;
+            switch (topic) {
+                case entities.waterHeater.mode_command_topic:
+                    device.setPowerState(message.toString())
+                    break;
+                case entities.waterHeater.temperature_command_topic:
+                    device.setTargetWaterTemperature(Math.trunc(+message.toString()))
+                    break;
+            }
+        } catch (error) {
+            logger.error("hassio:error", error?.message || error)
         }
-        
     })
 }
